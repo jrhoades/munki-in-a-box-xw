@@ -15,6 +15,8 @@
 
 # Pre-Reqs for this script: 10.8/Server 2 or 10.9/Server 3.  Web Services should be turned on.
 
+## JR A few edits to make it suitable for the workshop
+
 # Establish our Basic Variables:
 
 REPOLOC="/Users/Shared/"
@@ -22,21 +24,25 @@ REPONAME="munki_repo"
 REPODIR=${REPOLOC}${REPONAME}
 LOGGER="/usr/bin/logger -t Munki-in-a-Box"
 MUNKILOC="/usr/local/munki"
-WEBROOT="/Library/Server/Web/Data/Sites/Default"
+#WEBROOT="/Library/Server/Web/Data/Sites/Default"
+WEBROOT="/Library/WebServer/Documents/"
 PHPROOT="/Library/Server/Web/Config/php"
 GIT="/usr/bin/git"
 MANU="/usr/local/munki/manifestutil"
 TEXTEDITOR="TextWrangler.app"
 osvers=$(sw_vers -productVersion | awk -F. '{print $2}') # Thanks Rich Trouton
 webstatus=$(serveradmin status web | awk '{print $3}') # Thanks Charles Edge
-AUTOPKGRUN="autopkg run -v AdobeFlashPlayer.munki AdobeReader.munki Dropbox.munki Firefox.munki GoogleChrome.munki OracleJava7.munki TextWrangler.munki munkitools.munki MakeCatalogs.munki"
+#AUTOPKGRUN="autopkg run -v AdobeFlashPlayer.munki AdobeReader.munki Dropbox.munki Firefox.munki GoogleChrome.munki OracleJava7.munki TextWrangler.munki munkitools.munki MakeCatalogs.munki"
+AUTOPKGRUN="autopkg run -v munkitools.munki MakeCatalogs.munki"
 DEFAULTS="/usr/bin/defaults"
 MAINPREFSDIR="/Library/Preferences"
 ADMINUSERNAME="ladmin"
 
-echo "Welcome to Munki-in-a-Box. We're going to get things rolling here with a couple of tests!"
+echo "Welcome to Jon's version of Munki-in-a-Box. We're going to get things rolling here with a couple of tests!"
 
-echo $webstatus
+# Start Webserver
+
+apachectl start
 
 ####
 
@@ -52,13 +58,14 @@ if
 	 	exit 0 # 10.8+ for the Web Root Location.
 	
 fi
+#sadly apachectl status doesn't return a sensible value, so we just have to assume it's fine
 
-if
-	[[ $webstatus == *STOPPED* ]]; then 
-	${LOGGER} "Could not run because the Web Service is stopped"
-	echo "Please turn on Web Services in Server.app"
-	exit 0 # Sorry, turn on the webserver.	
-fi
+#if
+#	[[ $webstatus == *STOPPED* ]]; then 
+#	${LOGGER} "Could not run because the Web Service is stopped"
+#	echo "Please turn on Web Services in Server.app"
+#	exit 0 # Sorry, turn on the webserver.	
+#fi
 
 if
 
@@ -269,15 +276,16 @@ hdiutil detach /Volumes/MunkiAdmin-0.4.0-preview.2 -force
 ####
 
 #  Install MunkiReport-PHP
+#  Don't want this
 
 ####
 
-cd ${WEBROOT}
-git clone https://github.com/munkireport/munkireport-php.git
-cp munkireport-php/config_default.php munkireport-php/config.php
-chmod +a "_www allow add_file,delete_child" munkireport-php/app/db
-echo "short_open_tag = On" >> ${PHPROOT}/php.ini
-echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkireport-php/config.php 
+#cd ${WEBROOT}
+#git clone https://github.com/munkireport/munkireport-php.git
+#cp munkireport-php/config_default.php munkireport-php/config.php
+#chmod +a "_www allow add_file,delete_child" munkireport-php/app/db
+#echo "short_open_tag = On" >> ${PHPROOT}/php.ini
+#echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkireport-php/config.php 
 
 # This creates a user "root" with password "root"
 
