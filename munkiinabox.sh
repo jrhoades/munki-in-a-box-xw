@@ -198,6 +198,8 @@ echo "AutoPKG Installed!"
 ${DEFAULTS} write com.github.autopkg MUNKI_REPO $REPODIR
 
 autopkg repo-add http://github.com/autopkg/recipes.git
+# Add recipies for the workshop
+autopkg repo-add https://github.com/jrhoades/recipes.git
 
 ${DEFAULTS} write com.googlecode.munki.munkiimport editor ${TEXTEDITOR}
 ${DEFAULTS} write com.googlecode.munki.munkiimport repo_path ${REPODIR}
