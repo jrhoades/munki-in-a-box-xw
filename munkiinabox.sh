@@ -311,5 +311,5 @@ echo "Thank you for flying Munki in a Box Air! You now have a working repo, go f
 
 read -p "Press [Enter] key to reboot"
 
-osascript -e 'tell application "System Events" restart'
+osascript -e 'tell application "System Events" to restart'
 exit
