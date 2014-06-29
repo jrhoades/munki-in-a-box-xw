@@ -73,14 +73,19 @@ if
 	${LOGGER} "Installing Munki Tools Because They Aren't Present"
 	curl -L https://munki.googlecode.com/files/munkitools-1.0.0.1864.0.dmg -o $REPOLOC/munkitools.dmg
 	hdiutil attach $REPOLOC/munkitools.dmg -nobrowse
-	cd /Volumes/munkitools-1.0.0.1864.0/munkitools-1.0.0.1864.0.mpkg/Contents/Packages/
-	installer -pkg munkitools_admin-1.0.0.1864.0.pkg -target /
-	echo "Installed Munki Admin"
-	installer -pkg munkitools_core-1.0.0.1864.0.pkg -target /
-	echo "Installed Munki Core"
+	#need to install client tool & daemon as well.  Will need a reboot after :(
+	#cd /Volumes/munkitools-1.0.0.1864.0/munkitools-1.0.0.1864.0.mpkg/Contents/Packages/
+	#installer -pkg munkitools_admin-1.0.0.1864.0.pkg -target /
+	#echo "Installed Munki Admin"
+	#installer -pkg munkitools_core-1.0.0.1864.0.pkg -target /
+	#echo "Installed Munki Core"
+	#hdiutil detach /Volumes/munkitools-1.0.0.1864.0/ -force
+	installer -pkg /Volumes/munkitools-1.0.0.1864.0/munkitools-1.0.0.1864.0.mpkg -target /
+
+	${LOGGER} "Installed Munki Tools"
+
 	hdiutil detach /Volumes/munkitools-1.0.0.1864.0/ -force
-	
-	${LOGGER} "Installed Munki Admin and Munki Core packages"
+	#${LOGGER} "Installed Munki Admin and Munki Core packages"
 	echo "Installed Munki packages"
 	 
 fi	
@@ -304,4 +309,7 @@ ${LOGGER} "I put my toys away!"
 
 echo "Thank you for flying Munki in a Box Air! You now have a working repo, go forth and install your clients!"
 
+read -p "Press [Enter] key to reboot"
+
+osascript -e 'tell application "System Events" restart'
 exit
