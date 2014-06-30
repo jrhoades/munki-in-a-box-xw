@@ -266,6 +266,15 @@ done
 
 ####
 
+####
+
+# Install aamporter
+
+####
+
+curl -L https://raw.githubusercontent.com/timsutton/aamporter/master/aamporter.py -o /usr/local/bin/aamporter.py
+chmod a+rx /usr/local/bin/aamporter.py
+
 # curl -L https://github.com/seankaiser/automation-scripts/blob/master/autopkg/autopkg-wrapper.sh -o /usr/local/bin/autopkg-wrapper.sh
 
 ####
