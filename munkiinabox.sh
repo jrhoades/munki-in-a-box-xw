@@ -96,10 +96,10 @@ if
 
 	[[ ! -d /Applications/Xcode.app ]]; then
 	echo "You need to install the Xcode command line tools. Let me get that for you, it'll just take a minute."
-# Get and install Xcode CLI tools
-OSX_VERS=$(sw_vers -productVersion | awk -F "." '{print $2}')
+	# Get and install Xcode CLI tools
+	OSX_VERS=$(sw_vers -productVersion | awk -F "." '{print $2}')
  
-# on 10.9, we can leverage SUS to get the latest CLI tools
+	# on 10.9, we can leverage SUS to get the latest CLI tools
 	if [ "$OSX_VERS" -ge 9 ]; then
 
     # create the placeholder file that's checked by CLI updates' .dist code 
@@ -143,11 +143,20 @@ mkdir ${REPONAME}/manifests
 mkdir ${REPONAME}/pkgs
 mkdir ${REPONAME}/pkgsinfo
 
+# Download a default manifest & set the client identifier 
+
+sudo defaults write /Library/Preferences/ManagedInstalls ClientIdentifier "xworld" 
+curl -L https://raw.githubusercontent.com/jrhoades/munki-in-a-box-xw/master/xworld -o ${REPONAME}/manifests/xworld
+
+#need to add potflight scripts!
+
 chmod -R a+rX ${REPONAME}
 chown -R :admin ${REPONAME}
 
 ${LOGGER} "Repo Created"
 echo "Repo Created"
+
+
 
 
 ####
