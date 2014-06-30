@@ -310,7 +310,8 @@ cd ${WEBROOT}
 git clone https://github.com/munkireport/munkireport-php.git
 cp munkireport-php/config_default.php munkireport-php/config.php
 chmod +a "_www allow add_file,delete_child" munkireport-php/app/db
-echo "short_open_tag = On" >> ${PHPROOT}/php.ini
+#Already enable in 10.9
+#echo "short_open_tag = On" >> ${PHPROOT}/php.ini
 echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkireport-php/config.php 
 
 # This creates a user "root" with password "root"
