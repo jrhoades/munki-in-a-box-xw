@@ -33,15 +33,16 @@ TEXTEDITOR="TextWrangler.app"
 osvers=$(sw_vers -productVersion | awk -F. '{print $2}') # Thanks Rich Trouton
 #webstatus=$(serveradmin status web | awk '{print $3}') # Thanks Charles Edge
 #AUTOPKGRUN="autopkg run -v AdobeFlashPlayer.munki AdobeReader.munki Dropbox.munki Firefox.munki GoogleChrome.munki OracleJava7.munki TextWrangler.munki munkitools.munki MakeCatalogs.munki"
-AUTOPKGRUN="autopkg run -v munkitools.munki MakeCatalogs.munki"
+AUTOPKGRUN="autopkg run -v munkitools.munki GoogleChrome.munki MakeCatalogs.munki"
 DEFAULTS="/usr/bin/defaults"
 MAINPREFSDIR="/Library/Preferences"
 ADMINUSERNAME="ladmin"
 
 echo "Welcome to Jon's version of Munki-in-a-Box. We're going to get things rolling here with a couple of tests!"
 
-# Start Webserver
+# Enable PHP & Start Webserver
 
+echo -e "LoadModule php5_module libexec/apache2/libphp5.so\n$(cat /private/etc/apache2/other/php5.conf)" > /private/etc/apache2/other/php5.conf
 apachectl start
 
 ####
@@ -302,16 +303,15 @@ hdiutil detach /Volumes/MunkiAdmin-0.4.0-preview.2 -force
 ####
 
 #  Install MunkiReport-PHP
-#  Don't want this
 
 ####
 
-#cd ${WEBROOT}
-#git clone https://github.com/munkireport/munkireport-php.git
-#cp munkireport-php/config_default.php munkireport-php/config.php
-#chmod +a "_www allow add_file,delete_child" munkireport-php/app/db
-#echo "short_open_tag = On" >> ${PHPROOT}/php.ini
-#echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkireport-php/config.php 
+cd ${WEBROOT}
+git clone https://github.com/munkireport/munkireport-php.git
+cp munkireport-php/config_default.php munkireport-php/config.php
+chmod +a "_www allow add_file,delete_child" munkireport-php/app/db
+echo "short_open_tag = On" >> ${PHPROOT}/php.ini
+echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkireport-php/config.php 
 
 # This creates a user "root" with password "root"
 
