@@ -42,7 +42,7 @@ echo "Welcome to Jon's version of Munki-in-a-Box. We're going to get things roll
 
 # Enable PHP & Start Webserver
 
-echo -e "LoadModule php5_module libexec/apache2/libphp5.so\n$(cat /private/etc/apache2/other/php5.conf)" > /private/etc/apache2/other/php5.conf
+echo "LoadModule php5_module libexec/apache2/libphp5.so\n$(cat /private/etc/apache2/other/php5.conf)" > /private/etc/apache2/other/php5.conf
 apachectl start
 
 ####
