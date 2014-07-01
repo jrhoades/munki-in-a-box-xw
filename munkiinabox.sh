@@ -139,13 +139,7 @@ mkdir ${REPONAME}/manifests
 mkdir ${REPONAME}/pkgs
 mkdir ${REPONAME}/pkgsinfo
 
-# Download a default manifest & set the client identifier & repo_url
 
-sudo defaults write /Library/Preferences/ManagedInstalls SoftwareRepoURL "http://localhost/munki_repo" 
-sudo defaults write /Library/Preferences/ManagedInstalls ClientIdentifier "xworld" 
-curl -L https://raw.githubusercontent.com/jrhoades/munki-in-a-box-xw/master/xworld -o ${REPONAME}/manifests/xworld
-
-makecatalogs
 
 #need to add potflight scripts!
 
@@ -242,6 +236,13 @@ echo "AutoPKG has run"
 chown -R ${ADMINUSERNAME} ~/Library/AutoPkg
 chmod -R a+w ~/Library/AutoPkg
 
+# Download a default manifest & set the client identifier & repo_url
+
+sudo defaults write /Library/Preferences/ManagedInstalls SoftwareRepoURL "http://localhost/munki_repo" 
+sudo defaults write /Library/Preferences/ManagedInstalls ClientIdentifier "site_default" 
+#curl -L https://raw.githubusercontent.com/jrhoades/munki-in-a-box-xw/master/xworld -o ${REPONAME}/manifests/xworld
+
+
 ####
 
 # Create new site_default manifest and add imported packages to it
@@ -283,7 +284,7 @@ done
 
 curl -L https://raw.githubusercontent.com/timsutton/aamporter/master/aamporter.py -o /usr/local/bin/aamporter.py
 curl -L https://raw.githubusercontent.com/timsutton/aamporter/master/product-plist-examples/AdobePhotoshopCS6.plist -o ~/Desktop/AdobePhotoshopCS6.plist
-chmod a+rx /usr/local/bin/aamporter.py
+chmod -R a+wrx /usr/local/bin
 
 # curl -L https://github.com/seankaiser/automation-scripts/blob/master/autopkg/autopkg-wrapper.sh -o /usr/local/bin/autopkg-wrapper.sh
 
