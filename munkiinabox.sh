@@ -33,7 +33,7 @@ TEXTEDITOR="TextWrangler.app"
 osvers=$(sw_vers -productVersion | awk -F. '{print $2}') # Thanks Rich Trouton
 #webstatus=$(serveradmin status web | awk '{print $3}') # Thanks Charles Edge
 #AUTOPKGRUN="autopkg run -v AdobeFlashPlayer.munki AdobeReader.munki Dropbox.munki Firefox.munki GoogleChrome.munki OracleJava7.munki TextWrangler.munki munkitools.munki MakeCatalogs.munki"
-AUTOPKGRUN="autopkg run -v munkitools.munki GoogleChrome.munki MakeCatalogs.munki"
+AUTOPKGRUN="autopkg run -v munkitools.munki TextWrangler.munki GoogleChrome.munki MakeCatalogs.munki"
 DEFAULTS="/usr/bin/defaults"
 MAINPREFSDIR="/Library/Preferences"
 ADMINUSERNAME="admin"
@@ -283,7 +283,7 @@ done
 ####
 
 curl -L https://raw.githubusercontent.com/timsutton/aamporter/master/aamporter.py -o /usr/local/bin/aamporter.py
-curl -L https://raw.githubusercontent.com/timsutton/aamporter/master/product-plist-examples/AdobePhotoshopCS6.plist -o ~/Desktop/
+curl -L https://raw.githubusercontent.com/timsutton/aamporter/master/product-plist-examples/AdobePhotoshopCS6.plist -o ~/Desktop/AdobePhotoshopCS6.plist
 chmod a+rx /usr/local/bin/aamporter.py
 
 # curl -L https://github.com/seankaiser/automation-scripts/blob/master/autopkg/autopkg-wrapper.sh -o /usr/local/bin/autopkg-wrapper.sh
