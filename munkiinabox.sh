@@ -316,6 +316,9 @@ echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkir
 
 # This creates a user "root" with password "root"
 
+# Download the required pre/postflight scripts
+
+/bin/bash -c "$(curl -s --max-time 10 http://localhost/munkireport-php/index.php?/install)"
 
 ####
 
