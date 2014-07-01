@@ -51,14 +51,9 @@ apachectl start
 
 ####
 
-if 
-	[[ $osvers -ge 8 ]]; then sudo ln -s ${REPODIR} ${WEBROOT}
-	else
-		${LOGGER} "Could not run because the version of the OS does not meet requirements"
-		echo "Sorry, this is for Mac OS 10.8 or later."
-	 	exit 0 # 10.8+ for the Web Root Location.
-	
-fi
+
+ln -s ${REPODIR} ${WEBROOT}
+
 #sadly apachectl status doesn't return a sensible value, so we just have to assume it's fine
 
 #if
@@ -313,6 +308,7 @@ chmod +a "_www allow add_file,delete_child" munkireport-php/app/db
 #Already enable in 10.9
 #echo "short_open_tag = On" >> ${PHPROOT}/php.ini
 echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkireport-php/config.php 
+
 
 # This creates a user "root" with password "root"
 
