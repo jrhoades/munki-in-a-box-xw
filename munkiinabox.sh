@@ -36,7 +36,7 @@ osvers=$(sw_vers -productVersion | awk -F. '{print $2}') # Thanks Rich Trouton
 AUTOPKGRUN="autopkg run -v munkitools.munki GoogleChrome.munki MakeCatalogs.munki"
 DEFAULTS="/usr/bin/defaults"
 MAINPREFSDIR="/Library/Preferences"
-ADMINUSERNAME="ladmin"
+ADMINUSERNAME="admin"
 
 echo "Welcome to Jon's version of Munki-in-a-Box. We're going to get things rolling here with a couple of tests!"
 
