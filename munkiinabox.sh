@@ -42,7 +42,7 @@ echo "Welcome to Jon's version of Munki-in-a-Box. We're going to get things roll
 
 # Enable PHP & Start Webserver
 
-echo "LoadModule php5_module libexec/apache2/libphp5.so\n$(cat /private/etc/apache2/other/php5.conf)" > /private/etc/apache2/other/php5.conf
+echo -e "LoadModule php5_module libexec/apache2/libphp5.so\n$(cat /private/etc/apache2/other/php5.conf)" > /private/etc/apache2/other/php5.conf
 apachectl start
 
 ####
@@ -145,7 +145,7 @@ sudo defaults write /Library/Preferences/ManagedInstalls SoftwareRepoURL "http:/
 sudo defaults write /Library/Preferences/ManagedInstalls ClientIdentifier "xworld" 
 curl -L https://raw.githubusercontent.com/jrhoades/munki-in-a-box-xw/master/xworld -o ${REPONAME}/manifests/xworld
 
-
+makecatalogs
 
 #need to add potflight scripts!
 
@@ -240,6 +240,7 @@ echo "AutoPKG has run"
 # Bring it on home to the all powerful, all wise, local admin...
 
 chown -R ${ADMINUSERNAME} ~/Library/AutoPkg
+chmod -R a+w ~/Library/AutoPkg
 
 ####
 
