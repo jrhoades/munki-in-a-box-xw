@@ -139,14 +139,17 @@ mkdir ${REPONAME}/manifests
 mkdir ${REPONAME}/pkgs
 mkdir ${REPONAME}/pkgsinfo
 
-# Download a default manifest & set the client identifier 
+# Download a default manifest & set the client identifier & repo_url
 
+sudo defaults write /Library/Preferences/ManagedInstalls SoftwareRepoURL "http://localhost/munki_repo" 
 sudo defaults write /Library/Preferences/ManagedInstalls ClientIdentifier "xworld" 
 curl -L https://raw.githubusercontent.com/jrhoades/munki-in-a-box-xw/master/xworld -o ${REPONAME}/manifests/xworld
 
+
+
 #need to add potflight scripts!
 
-chmod -R a+rX ${REPONAME}
+chmod -R a+wrX ${REPONAME}
 chown -R :admin ${REPONAME}
 
 ${LOGGER} "Repo Created"
