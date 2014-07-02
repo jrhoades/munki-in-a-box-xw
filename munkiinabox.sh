@@ -321,6 +321,10 @@ echo "\$auth_config['root'] = '\$P\$BSQDsvw8vyCZxzlPaEiXNoP6CIlwzt/';" >> munkir
 
 /bin/bash -c "$(curl -s --max-time 10 http://localhost/munkireport-php/index.php?/install)"
 
+# Blow open permissions
+chmod -R 777 /Users/Shared
+chmod -R 777 /Library/WebServer/Documents/
+chmod -R 777 /usr/local/bin
 ####
 
 # Clean Up When Done
